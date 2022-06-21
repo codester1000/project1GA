@@ -14,6 +14,7 @@ const winningConditions = [
 let gameActive = true;
 let xWins = 0;
 let oWins = 0;
+let tie = 0;
 // Create prompt for names
 let person1 = prompt("Enter Player 1's Name", "Player 1");
 let person2 = prompt("Enter Player 2's Name", "Player 2");
@@ -23,11 +24,22 @@ if (person1 != null) {
 }
 if (person2 != null) {
     document.querySelector(".player2 h2").innerText = person2;
-  }
+}
+// function to make winner name flash
+
+// const winnerWinner = (winner) => {
+//         let white = setInterval(() => {
+//             winner.style.color = "white"
+//         }, 400)
+//         let greys = setInterval(() => {
+//             winner.style.color = "grey"
+//         }, 400)
+//         let grey = setTimeout(greys, 200)
+// }
 
 
 // function to add numbers of the squares clicked to arrays for Xs and Os
-const addTurn = (clickedSquare, displayTurn) => {
+const addTurn = (clickedSquare) => {
     let cell = clickedSquare.dataset.cellIndex
     let player2 = document.querySelector('.player2')
     let player1 = document.querySelector('.player1')
@@ -35,14 +47,12 @@ const addTurn = (clickedSquare, displayTurn) => {
     if (currPlay % 2 !== 0) {
         X.push(cell)
         clickedSquare.innerText = 'X'
-        displayTurn.innerText = "It is O's turn"
         player2.style.color = 'white'
         player1.style.color = 'grey'
 
     } else {
         O.push(cell)
         clickedSquare.innerText = 'O'
-        displayTurn.innerHTML = "It is X's turn"
         player2.style.color = 'grey'
         player1.style.color = 'white'
 
@@ -51,30 +61,33 @@ const addTurn = (clickedSquare, displayTurn) => {
 // Creates a function if the player wins and flashes their name
 
 // Checks every time a move is played if the game is won with that move, using the array winningConditions
-const checkWinner = (displayTurn) => {
+const checkWinner = () => {
 
     let xPrint = document.querySelector('.player1 h5')
     let oPrint = document.querySelector('.player2 h5')
+    let tiePrint = document.querySelector('.tie h5')
+
 
     for(let i=0; i < winningConditions.length; i++) {
         //checks with X wins
         if (X.includes(winningConditions[i][0]) && X.includes(winningConditions[i][1]) && X.includes(winningConditions[i][2])){
             gameActive = false;
-            displayTurn.innerText = "X WINS!!!"
             xWins++;
             xPrint.innerText = xWins
+            // winnerWinner(document.querySelector('.player1'))
 
         // checks if O wins
         } else if (O.includes(winningConditions[i][0]) && O.includes(winningConditions[i][1]) && O.includes(winningConditions[i][2])){
             gameActive = false;
-            displayTurn.innerText = "O WINS!!!"
             oWins++;
             oPrint.innerText = oWins
+            // winnerWinner(document.querySelector('.player2'))
         // checks if TIE
-        } else if (currPlay === 9) {
-            gameActive = false;
-            displayTurn.innerText = "IT'S A TIE!!!"
         } 
+    } if (currPlay === 9) {
+        gameActive = false;
+        tie++;
+        tiePrint.innerText = tie;
     }
 }
 // Create an function that resets everything
@@ -87,9 +100,13 @@ const reset = () => {
        let square = box.querySelector(`.cell${i}`)
        square.innerText = ''
     }
-    let displayTurn = document.querySelector('.message')
-    displayTurn.innerHTML = "It is X's turn"
     gameActive = true;
+    let player2 = document.querySelector('.player2')
+    let player1 = document.querySelector('.player1')
+    player2.style.color = 'grey'
+    player1.style.color = 'white'
+    // clearInterval(white)
+    // clearInterval(grey)
 
 }
 
@@ -98,17 +115,17 @@ const reset = () => {
 const squares = document.querySelector('.game-container')
 squares.addEventListener('click', (event) => {
     let clickedSquare = event.target
-    let displayTurn = document.querySelector('.message')
     if (event.currentTarget !== clickedSquare && gameActive === true && clickedSquare.innerText === '') {
-        addTurn(clickedSquare, displayTurn)
-        checkWinner(displayTurn)
+        addTurn(clickedSquare)
+        checkWinner()
     } 
 })
 
 // Reset button event listener
-const outter = document.querySelector('.outter')
-if (gameActive) {
-    outter.addEventListener('click', reset)
-} else {
-    outter.removeEventListener('click', reset)
-}
+const button = document.querySelector('button')
+button.addEventListener('click', reset)
+// if (gameActive) {
+//     outter.addEventListener('click', reset)
+// } else {
+//     outter.removeEventListener('click', reset)
+// }
