@@ -1,22 +1,55 @@
 body {
     text-align: center;
-    margin: auto;
+    margin: 0 auto;
+    color: white;
+    background-color: black;
+    font-family: 'Permanent Marker', cursive;
+    user-select: none;
+
+}
+.outter {
+    position: relative;
+    padding-top: 7%;
 }
 .game-container {
     display: grid;
     grid-template-columns: 150px 150px 150px;
-    background-color: white;
+    grid-template-rows: 150px 150px 150px;
     width: 450px;
     height: 450px;
     margin: 0 auto;
-    padding-top: 10%;
+    position: relative;
 }
 .cell {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 0;
     font-size: 100px;
     text-align: center;
-
+}
+.board {
+    width: 450px;
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
 }
 
+.text-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+}
+.player1 {
+    float: left;
+    width: 150px;
+    color: white;
+} 
+.tie {
+    float: left;
+    width: 150px;
+}
+.player2 {
+    float: left;
+    width: 150px;
+}

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <!-- META -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,30 +15,37 @@
     <title>TIC TAC TOE</title>
 </head>
 <body>
-        <div class="game-container">
-            <div data-cell-index="0" class="cell cell0"></div>
-            <div data-cell-index="1" class="cell cell1"></div>
-            <div data-cell-index="2" class="cell cell2"></div>
-            <div data-cell-index="3" class="cell cell3"></div>
-            <div data-cell-index="4" class="cell cell4"></div>
-            <div data-cell-index="5" class="cell cell5"></div>
-            <div data-cell-index="6" class="cell cell6"></div>
-            <div data-cell-index="7" class="cell cell7"></div>
-            <div data-cell-index="8" class="cell cell8"></div>
-        </div>
-        <h2 class="message">IT IS Xs TURN</h2>  
-        <div class="text-cont">
-            <div class="player1">      
-            <h2>PLAYER 1</h2>
-            <h5>0</h5>
-            <div class="tie">      
-            <h2>TIE</h2>
-            <h5>0</h5>
-            <div class="player2">      
-            <h2>PLAYER 2</h2>
-            <h5>0</h5>
-        </div>
-        <button type="button">RESET</button>
+<div class="outter">
+    <img class="board" src="images/chalk cross.svg" alt="">
+    <div class="game-container">
+        <div data-cell-index="0" class="cell cell0"></div>
+        <div data-cell-index="1" class="cell cell1"></div>
+        <div data-cell-index="2" class="cell cell2"></div>
+        <div data-cell-index="3" class="cell cell3"></div>
+        <div data-cell-index="4" class="cell cell4"></div>
+        <div data-cell-index="5" class="cell cell5"></div>
+        <div data-cell-index="6" class="cell cell6"></div>
+        <div data-cell-index="7" class="cell cell7"></div>
+        <div data-cell-index="8" class="cell cell8"></div>
+    </div>
+</div>
+
+<h2 class="message">It's X's Turn</h2> 
+<button type="button">RESET</button> 
+<div class="text-content">
+    <div class="player1">      
+    <h2>Player 1</h2>
+    <h5>0</h5>
+    </div>
+    <div class="tie">      
+    <h2>Tie</h2>
+    <h5>0</h5>
+    </div>
+    <div class="player2">      
+    <h2>Player 2</h2>
+    <h5>0</h5>
+    </div>
+</div>
 
 <script src="app.js"></script>
 </body>
