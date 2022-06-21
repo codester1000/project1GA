@@ -105,27 +105,26 @@ const reset = () => {
     let player1 = document.querySelector('.player1')
     player2.style.color = 'grey'
     player1.style.color = 'white'
+    console.log('hey')
+    squares.removeEventListener('click', reset)
     // clearInterval(white)
     // clearInterval(grey)
 
 }
 
 // Creating an event listener for the tic tac toe box
-// I kind think this should be at the end because there should be some functions in between that can be used when somethings clicked
 const squares = document.querySelector('.game-container')
 squares.addEventListener('click', (event) => {
     let clickedSquare = event.target
-    if (event.currentTarget !== clickedSquare && gameActive === true && clickedSquare.innerText === '') {
+    if (!gameActive) {
+        reset()
+    } else if (event.currentTarget !== clickedSquare && gameActive === true && clickedSquare.innerText === '') {
         addTurn(clickedSquare)
         checkWinner()
     } 
+
 })
 
 // Reset button event listener
-const button = document.querySelector('button')
-button.addEventListener('click', reset)
-// if (gameActive) {
-//     outter.addEventListener('click', reset)
-// } else {
-//     outter.removeEventListener('click', reset)
-// }
+// const button = document.querySelector('button')
+// button.addEventListener('click', reset)
