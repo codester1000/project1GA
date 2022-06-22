@@ -20,10 +20,10 @@ let person1 = prompt("Enter Player 1's Name", "Player 1");
 let person2 = prompt("Enter Player 2's Name", "Player 2");
 // Changes name of players if they aren't empty
 if (person1 != null) {
-  document.querySelector(".player1 h2").innerText = person1;
+  document.querySelector(".player1 h2").innerText = person1 + " (x)";
 }
 if (person2 != null) {
-    document.querySelector(".player2 h2").innerText = person2;
+    document.querySelector(".player2 h2").innerText = person2 + " (o)";
 }
 
 // function to make winner name flash
