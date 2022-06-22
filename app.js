@@ -25,42 +25,59 @@ if (person1 != null) {
 if (person2 != null) {
     document.querySelector(".player2 h2").innerText = person2;
 }
-// function to make winner name flash
 
-// const winnerWinner = (winner) => {
-//         let white = setInterval(() => {
-//             winner.style.color = "white"
-//         }, 400)
-//         let greys = setInterval(() => {
-//             winner.style.color = "grey"
-//         }, 400)
-//         let grey = setTimeout(greys, 200)
-// }
+// function to make winner name flash
+const winnerWinner = (winner) => {
+    let white = () => {
+        winner.style.color = "white"
+        console.log('white')
+    }
+    let grey = () => {
+        winner.style.color = "rgba(256,256, 256, 0.5)"
+    }
+    setTimeout(white, 250)
+    setTimeout(grey, 500)
+    setTimeout(white, 750)
+    setTimeout(grey, 1000)
+    setTimeout(white, 1250)
+    setTimeout(grey, 1500)
+    setTimeout(white, 1750)
+    setTimeout(grey, 2000)
+    if (document.querySelector('.player1') == winner) {
+        document.querySelector('.player2').style.color = 'rgba(256,256, 256, 0.5)';
+        setTimeout(white, 2250)
+    } else if (document.querySelector('.player2') == winner) {
+        document.querySelector('.player1').style.color = 'rgba(256,256, 256, 0.5)';
+        setTimeout(white, 2250)
+    } else {
+        document.querySelector('.player1').style.color = 'rgba(256,256, 256, 0.5)';
+        document.querySelector('.player2').style.color = 'rgba(256,256, 256, 0.5)';
+    }
+}
 
 
 // function to add numbers of the squares clicked to arrays for Xs and Os
 const addTurn = (clickedSquare) => {
-    let cell = clickedSquare.dataset.cellIndex
-    let player2 = document.querySelector('.player2')
-    let player1 = document.querySelector('.player1')
-    currPlay++
-    if (currPlay % 2 !== 0) {
-        X.push(cell)
-        clickedSquare.innerText = 'X'
-        player2.style.color = 'white'
-        player1.style.color = 'grey'
+let cell = clickedSquare.dataset.cellIndex
+let player2 = document.querySelector('.player2')
+let player1 = document.querySelector('.player1')
+currPlay++
+if (currPlay % 2 !== 0) {
+    X.push(cell)
+    clickedSquare.innerText = 'X'
+    player2.style.color = 'white'
+    player1.style.color = 'rgba(256,256, 256, 0.5)'
 
-    } else {
-        O.push(cell)
-        clickedSquare.innerText = 'O'
-        player2.style.color = 'grey'
-        player1.style.color = 'white'
+} else {
+    O.push(cell)
+    clickedSquare.innerText = 'O'
+    player2.style.color = 'rgba(256,256, 256, 0.5)'
+    player1.style.color = 'white'
 
-    }
 }
-// Creates a function if the player wins and flashes their name
+}
 
-// Checks every time a move is played if the game is won with that move, using the array winningConditions
+// Checks every time a move is played if the game is won with that move
 const checkWinner = () => {
 
     let xPrint = document.querySelector('.player1 h5')
@@ -74,20 +91,35 @@ const checkWinner = () => {
             gameActive = false;
             xWins++;
             xPrint.innerText = xWins
-            // winnerWinner(document.querySelector('.player1'))
+            winnerWinner(document.querySelector('.player1'))
+            var winImg = document.createElement('img');
+            winImg.src = `images/${i}.svg`
+            winImg.classList.add('winImg')
+            document.querySelector('.game-container').appendChild(winImg)
 
         // checks if O wins
         } else if (O.includes(winningConditions[i][0]) && O.includes(winningConditions[i][1]) && O.includes(winningConditions[i][2])){
             gameActive = false;
             oWins++;
             oPrint.innerText = oWins
-            // winnerWinner(document.querySelector('.player2'))
-        // checks if TIE
+            winnerWinner(document.querySelector('.player2'))
+            var winImg = document.createElement('img');
+            winImg.src = `images/${i}.svg`
+            winImg.classList.add('winImg')
+            document.querySelector('.game-container').appendChild(winImg)
+        
         } 
+        // Add line if someone wins
+
+        
+    
+
+    // checks if TIE
     } if (currPlay === 9) {
         gameActive = false;
         tie++;
         tiePrint.innerText = tie;
+        winnerWinner(document.querySelector('.tie'))
     }
 }
 // Create an function that resets everything
@@ -103,12 +135,12 @@ const reset = () => {
     gameActive = true;
     let player2 = document.querySelector('.player2')
     let player1 = document.querySelector('.player1')
-    player2.style.color = 'grey'
+    player2.style.color = 'rgba(256,256, 256, 0.5)'
     player1.style.color = 'white'
-    console.log('hey')
+    // remove line
+    document.querySelector('.winImg').remove()
+
     squares.removeEventListener('click', reset)
-    // clearInterval(white)
-    // clearInterval(grey)
 
 }
 
@@ -116,15 +148,32 @@ const reset = () => {
 const squares = document.querySelector('.game-container')
 squares.addEventListener('click', (event) => {
     let clickedSquare = event.target
+    // checks if game is not active and allows people to click the play area if the game is over
     if (!gameActive) {
         reset()
-    } else if (event.currentTarget !== clickedSquare && gameActive === true && clickedSquare.innerText === '') {
+    } else if (event.currentTarget !== clickedSquare && clickedSquare.innerText === '') {
         addTurn(clickedSquare)
         checkWinner()
-    } 
-
+    }
 })
+// squares.addEventListener('mouseover', (event) => {
+//     let clickedSquare = event.target
+//     if (clickedSquare.innerText === ''){
+//         if (currPlay % 2 !== 0) {
+//             clickedSquare.innerText = 'O'
+//             clickedSquare.style.color = 'rgba(256,256, 256, 0.5)'
+//         } else {
+//             clickedSquare.innerText = 'X'
+//             clickedSquare.style.color = 'rgba(256,256, 256, 0.5)'
+//         }
+// }
+// })
+// squares.addEventListener('mouseout', (event) => {
+//     let clickedSquare = event.target
+//     clickedSquare.style.color = 'white'
 
-// Reset button event listener
-// const button = document.querySelector('button')
-// button.addEventListener('click', reset)
+// })
+
+const colorSelected = (element) => {
+    document.body.style.background = element.value
+}

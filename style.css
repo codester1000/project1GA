@@ -9,7 +9,7 @@ body {
 }
 .outter {
     position: relative;
-    padding-top: 7%;
+    padding-top: 60px;
 }
 .game-container {
     display: grid;
@@ -33,12 +33,20 @@ body {
     margin-left:auto;
     margin-right:auto;
 }
+.winImg {
+    width: 450px;
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+}
 
 .text-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: grey;
+    color: rgba(256,256, 256, 0.5);
 }
 .player1 {
     float: left;
@@ -52,4 +60,32 @@ body {
 .player2 {
     float: left;
     width: 150px;
+}
+.player1 h2 {
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+.player1 h5 {
+    margin-top: 0;
+    font-size: 2.5rem;
+}
+.player2 h2 {
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+.player2 h5 {
+    margin-top: 0;
+    font-size: 2.5rem;
+}
+.tie h2 {
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+.tie h5 {
+    margin-top: 0;
+    font-size: 2.5rem;
+}
+
+.color-picker {
+    margin-bottom: 30px;
 }
